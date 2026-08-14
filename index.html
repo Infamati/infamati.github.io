@@ -408,11 +408,61 @@
     color: var(--sage);
   }
   footer .heart{ color: var(--gold); }
+
+  /* ============ Music toggle ============ */
+  #sound-toggle{
+    position: fixed;
+    bottom: 22px;
+    left: 22px;
+    z-index: 50;
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-light);
+    background: rgba(95,111,82,0.85);
+    backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    transition: transform 0.25s ease, opacity 0.4s ease;
+    opacity: 0;
+    pointer-events: none;
+  }
+  #sound-toggle.show{ opacity: 1; pointer-events: auto; }
+  #sound-toggle:active{ transform: scale(0.92); }
+  #sound-toggle svg{ width: 20px; height: 20px; color: var(--pearl); }
+  #sound-toggle .bars{ display: flex; align-items: flex-end; gap: 2px; height: 16px; }
+  #sound-toggle .bar{
+    width: 3px; background: var(--gold-light); border-radius: 2px;
+    animation: sway 0.9s ease-in-out infinite;
+  }
+  #sound-toggle.paused .bar{ animation-play-state: paused; height: 4px !important; }
+  #sound-toggle .bar:nth-child(1){ animation-delay: 0s; }
+  #sound-toggle .bar:nth-child(2){ animation-delay: 0.2s; }
+  #sound-toggle .bar:nth-child(3){ animation-delay: 0.4s; }
+  @keyframes sway{
+    0%,100%{ height: 6px; } 50%{ height: 16px; }
+  }
 </style>
 </head>
 <body>
 
 <div id="petals"></div>
+
+<!--
+  BACKGROUND MUSIC:
+  Upload your song file to the SAME GitHub folder as this index.html file,
+  and make sure it's named exactly "song.mp3" (or change the src below to match your filename).
+  Keep the file reasonably small (an MP3 under ~5-8MB loads fastest for guests on mobile data).
+-->
+<audio id="bg-music" src="song.mp3" loop preload="auto"></audio>
+
+<button id="sound-toggle" class="paused" aria-label="تشغيل/إيقاف الموسيقى">
+  <div class="bars">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+</button>
 
 <!-- Gate reveal -->
 <div id="gate">
@@ -440,7 +490,7 @@
       </svg>
       <div class="content">
         <div class="eyebrow reveal d1">دعوة زفاف</div>
-        <h1 class="reveal d2">الدكتور مصطفى </h1>
+        <h1 class="reveal d2">الدكتور مصطفى</h1>
         <span class="amp reveal d2">و</span>
         <h1 class="reveal d3">الدكتورة تبارك</h1>
         <p class="tagline reveal d4">بمشيئة الله تعالى، يسرّنا دعوتكم<br>لمشاركتنا فرحة عقد قراننا</p>
@@ -605,6 +655,8 @@
   // ---------- Gate open (fixed: smoother, reveals hero only after doors clear) ----------
   const gate = document.getElementById('gate');
   const page = document.getElementById('page');
+  const music = document.getElementById('bg-music');
+  const soundToggle = document.getElementById('sound-toggle');
   let opened = false;
   function openGate(){
     if(opened) return;
@@ -612,9 +664,32 @@
     gate.classList.add('open');
     setTimeout(()=>{ page.classList.add('revealed'); }, 250);
     setTimeout(()=> gate.classList.add('hidden'), 2200);
+
+    // Try to start music now — this click is a genuine user gesture,
+    // so most browsers will allow audio to start here.
+    music.volume = 0.55;
+    music.play().then(()=>{
+      soundToggle.classList.remove('paused');
+    }).catch(()=>{
+      // Autoplay blocked (e.g. the 6s auto-open fallback fired with no tap) —
+      // just show the button in paused state so the guest can start it manually.
+      soundToggle.classList.add('paused');
+    });
+    soundToggle.classList.add('show');
   }
   gate.addEventListener('click', openGate);
   setTimeout(openGate, 6000); // gentle auto-open fallback
+
+  soundToggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    if(music.paused){
+      music.play().catch(()=>{});
+    } else {
+      music.pause();
+    }
+  });
+  music.addEventListener('play', ()=> soundToggle.classList.remove('paused'));
+  music.addEventListener('pause', ()=> soundToggle.classList.add('paused'));
 
   // ---------- Reveal cards on scroll ----------
   const cards = document.querySelectorAll('.card');
