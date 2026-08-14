@@ -20,13 +20,13 @@
     --ink: #3c4230;
     --paper: #faf7ef;
   }
- 
+
   *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
- 
+
   @media (prefers-reduced-motion: reduce){
     *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   }
- 
+
   html, body{
     background: var(--sage-deep);
     color: var(--ink);
@@ -34,7 +34,7 @@
     overflow-x: hidden;
     width: 100%;
   }
- 
+
   body{
     min-height: 100vh;
     min-height: 100dvh;
@@ -42,7 +42,7 @@
       radial-gradient(ellipse at top, rgba(255,255,255,0.06), transparent 60%),
       linear-gradient(180deg, #6b7a5c 0%, #55634a 40%, #47543d 100%);
   }
- 
+
   /* ============ Petals ============ */
   #petals{
     position: fixed; inset: 0; pointer-events: none; z-index: 40; overflow: hidden;
@@ -60,7 +60,7 @@
     0%{ transform: translateY(-10vh) translateX(0) rotate(0deg); }
     100%{ transform: translateY(110vh) translateX(var(--drift, 40px)) rotate(360deg); }
   }
- 
+
   /* ============ Gate / Arch Reveal ============ */
   #gate{
     position: fixed; inset: 0; z-index: 100;
@@ -83,7 +83,7 @@
   #gate.open .leaf.left{ transform: translateX(-102%); }
   #gate.open .leaf.right{ transform: translateX(102%); }
   #gate.open{ pointer-events: none; }
- 
+
   #gate .center-text{
     position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
     text-align:center; width: 100%; max-width: 320px; padding: 0 24px;
@@ -124,7 +124,7 @@
     0%,100%{ opacity: 0.55; } 50%{ opacity: 1; }
   }
   #gate.hidden{ display:none; }
- 
+
   /* ============ Layout shell ============ */
   .page{
     max-width: 480px;
@@ -133,12 +133,12 @@
     position: relative;
     z-index: 1;
   }
- 
+
   section{
     padding: 44px 22px;
     position: relative;
   }
- 
+
   /* ============ Hero ============ */
   .hero{
     padding-top: 56px;
@@ -160,7 +160,7 @@
     z-index: 0;
   }
   .hero .content{ position: relative; z-index: 1; }
- 
+
   .reveal{
     opacity: 0;
     transform: translateY(16px);
@@ -172,7 +172,7 @@
   .revealed .reveal.d3{ transition-delay: 0.4s; }
   .revealed .reveal.d4{ transition-delay: 0.6s; }
   .revealed .reveal.d5{ transition-delay: 0.8s; }
- 
+
   .eyebrow{
     font-size: 12px;
     letter-spacing: 4px;
@@ -202,7 +202,7 @@
     font-weight: 300;
     padding: 0 6px;
   }
- 
+
   .divider{
     display:flex; align-items:center; justify-content:center; gap: 14px;
     margin: 26px auto 0; width: 200px;
@@ -210,7 +210,7 @@
   }
   .divider .line{ flex:1; height:1px; background: linear-gradient(90deg, transparent, var(--gold-light), transparent); }
   .divider .diamond{ width:7px; height:7px; background: var(--gold-light); transform: rotate(45deg); flex-shrink:0; }
- 
+
   /* ============ Info panel ============ */
   .info{
     background: var(--paper);
@@ -220,7 +220,7 @@
     position: relative;
     overflow: hidden;
   }
- 
+
   .rose{
     position: absolute;
     width: 118px;
@@ -235,13 +235,13 @@
   .rose .petal-inner{ fill: #f1e8d4; }
   .rose .leaf{ fill: var(--sage-light); }
   .rose .stem{ stroke: var(--sage); stroke-width: 2.4; fill: none; }
- 
+
   .info-inner{
     position: relative;
     z-index: 1;
     padding-bottom: 6px;
   }
- 
+
   .quote{
     text-align:center;
     font-family:'Aref Ruqaa', serif;
@@ -254,7 +254,7 @@
   .quote .src{
     display:block; margin-top: 10px; font-family:'Tajawal',sans-serif; font-size: 12px; letter-spacing:2px; color: var(--gold);
   }
- 
+
   .cards{
     display: grid;
     gap: 18px;
@@ -338,14 +338,14 @@
     transition: background 0.3s ease, color 0.3s ease;
   }
   .map-btn:active{ background: var(--gold); color: #fff; }
- 
+
   .guest-note{
     margin-top: 16px;
     font-size: 12.5px;
     line-height: 2;
     color: #8a8470;
   }
- 
+
   /* ============ Countdown ============ */
   .countdown-wrap{
     margin-top: 32px;
@@ -377,7 +377,7 @@
     letter-spacing: 1px;
     color: var(--sage-light);
   }
- 
+
   /* ============ Personal note ============ */
   .personal-note{
     text-align: center;
@@ -395,7 +395,7 @@
     color: #a06a5b;
     font-weight: 500;
   }
- 
+
   footer{
     text-align: center;
     margin-top: 36px;
@@ -407,9 +407,9 @@
 </style>
 </head>
 <body>
- 
+
 <div id="petals"></div>
- 
+
 <!-- Gate reveal -->
 <div id="gate">
   <div class="leaf left"></div>
@@ -420,9 +420,9 @@
   </div>
   <div class="tap-hint">اضغط لفتح الدعوة</div>
 </div>
- 
+
 <div class="page" id="page">
- 
+
   <!-- HERO -->
   <section class="hero">
     <div class="frame-wrap">
@@ -444,10 +444,10 @@
     </div>
     <div class="divider reveal d5"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
   </section>
- 
+
   <!-- INFO -->
   <div class="info">
- 
+
     <svg class="rose top-left" viewBox="0 0 140 170" xmlns="http://www.w3.org/2000/svg">
       <path class="stem" d="M70 170 C60 130 78 108 66 78" />
       <path class="leaf" d="M64 108 C48 100 34 108 26 122 C42 128 58 122 64 108 Z"/>
@@ -471,7 +471,7 @@
         <circle class="petal-inner" cx="0" cy="0" r="8"/>
       </g>
     </svg>
- 
+
     <svg class="rose top-right" viewBox="0 0 140 170" xmlns="http://www.w3.org/2000/svg">
       <path class="stem" d="M70 170 C60 130 78 108 66 78" />
       <path class="leaf" d="M64 108 C48 100 34 108 26 122 C42 128 58 122 64 108 Z"/>
@@ -495,7 +495,7 @@
         <circle class="petal-inner" cx="0" cy="0" r="8"/>
       </g>
     </svg>
- 
+
     <div class="info-inner">
       <section style="padding-bottom: 10px;">
         <p class="quote">
@@ -503,7 +503,7 @@
           وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً »
           <span class="src">سورة الروم — آية 21</span>
         </p>
- 
+
         <div class="cards">
           <!-- Merged date + location card -->
           <div class="card">
@@ -514,9 +514,9 @@
                 <div class="value">الثلاثاء<br>١ سبتمبر</div>
                 <div class="sub-value">٥:٠٠ مساءً</div>
               </div>
- 
+
               <div class="dl-sep"></div>
- 
+
               <div class="dl-col">
                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s7-6.2 7-12a7 7 0 10-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
                 <div class="label">المكان</div>
@@ -524,12 +524,12 @@
                 <div class="sub-value">كورنيش الأعظمية</div>
               </div>
             </div>
- 
+
             <div class="mini-divider"></div>
- 
+
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%D9%82%D8%A7%D8%B9%D8%A9%20%D8%B2%D9%85%D8%B2%D9%85%20%D8%A7%D9%84%D9%85%D9%84%D9%83%D9%8A%D8%A9%20%D9%83%D9%88%D8%B1%D9%86%D9%8A%D8%B4%20%D8%A7%D9%84%D8%A7%D8%B9%D8%B8%D9%85%D9%8A%D8%A9" target="_blank" rel="noopener">فتح الموقع على الخريطة</a>
           </div>
- 
+
           <!-- Guest count + entry reminder card -->
           <div class="card">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="17.5" cy="9" r="2.4"/><path d="M15.7 14.2c2.6.3 4.3 2.5 4.3 5.8"/></svg>
@@ -539,7 +539,7 @@
             <p class="guest-note">يُرجى الاحتفاظ بهذه الدعوة معكم،<br>فستحتاجون لإبرازها عند الدخول</p>
           </div>
         </div>
- 
+
         <div class="countdown-wrap">
           <div class="label">الوقت المتبقي للفرحة</div>
           <div class="countdown">
@@ -549,11 +549,11 @@
             <div class="unit"><div class="num" id="cd-secs">--</div><div class="unit-label">ثانية</div></div>
           </div>
         </div>
- 
+
         <div class="personal-note">
           <p>الدعوة شخصية<br><span class="no-kids">يُرجى العلم أنه ممنوع اصطحاب الأطفال</span></p>
         </div>
- 
+
         <footer>
           بِحُبٍّ <span class="heart">♥</span> مصطفى و تبارك
         </footer>
@@ -561,7 +561,7 @@
     </div>
   </div>
 </div>
- 
+
 <script>
   // ---------- Petals ----------
   const petalContainer = document.getElementById('petals');
@@ -582,7 +582,7 @@
     p.style.setProperty('--drift', drift);
     petalContainer.appendChild(p);
   }
- 
+
   // ---------- Gate open (fixed: smoother, reveals hero only after doors clear) ----------
   const gate = document.getElementById('gate');
   const page = document.getElementById('page');
@@ -596,14 +596,14 @@
   }
   gate.addEventListener('click', openGate);
   setTimeout(openGate, 6000); // gentle auto-open fallback
- 
+
   // ---------- Reveal cards on scroll ----------
   const cards = document.querySelectorAll('.card');
   const obs = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in-view'); });
   }, {threshold: 0.2});
   cards.forEach(c=>obs.observe(c));
- 
+
   // ---------- Countdown ----------
   const weddingDate = new Date("2026-09-01T17:00:00+03:00");
   const arDigits = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
@@ -625,7 +625,7 @@
   }
   updateCountdown();
   setInterval(updateCountdown, 1000);
- 
+
   // ---------- Guest count ----------
   // HOW TO CHANGE THE GUEST COUNT PER PERSON:
   // Easiest: add ?guests=N to the end of the link you send, e.g.
@@ -638,6 +638,6 @@
     : GUEST_COUNT_DEFAULT;
   document.getElementById('guest-count').textContent = toArabicDigits(guestCount);
 </script>
- 
+
 </body>
 </html>
