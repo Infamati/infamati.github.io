@@ -10,8 +10,8 @@
 <style>
   :root{
     --sage-deep: #ad9074;
-    --sage: #92a17f;
-    --sage-light: #c7d1b8;
+    --sage: #a58b68;
+    --sage-light: #e6d8c2;
     --ivory: #f7f2e7;
     --ivory-warm: #efe6d3;
     --gold: #b6924f;
@@ -65,16 +65,18 @@
   #gate{
     position: fixed; inset: 0; z-index: 100;
     display: flex;
-    background: var(--sage-deep);
+    direction: ltr; /* page is RTL; keep door layout left-to-right so each door exits its own side */
+    background: transparent; /* doors provide the cover, so no solid layer to snap away */
     height: 100vh;
     height: 100dvh;
     cursor: pointer;
   }
+  #gate .center-text, #gate .tap-hint{ direction: rtl; }
   #gate .leaf{
     flex: 1;
     background:
       radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.08), transparent 55%),
-      linear-gradient(180deg, #7a8a68, #4c5a41);
+      linear-gradient(180deg, #bba083, #93714e);
     position: relative;
     transition: transform 1.9s cubic-bezier(.76,0,.24,1), opacity 1.9s ease;
   }
@@ -223,15 +225,19 @@
     align-items: center;
     gap: 6px;
     margin: 22px auto 0;
-    color: var(--gold-light);
+    color: var(--pearl);
+    text-shadow: 0 1px 8px rgba(80,55,30,0.45);
   }
   .scroll-hint span{
-    font-size: 13px;
+    font-size: 22px;
+    font-weight: 700;
     letter-spacing: normal;
-    opacity: 0.85;
+    opacity: 1;
   }
   .scroll-hint svg{
-    width: 20px; height: 20px;
+    width: 44px; height: 44px;
+    stroke-width: 2.2;
+    filter: drop-shadow(0 2px 4px rgba(80,55,30,0.45));
     animation: bob 1.6s ease-in-out infinite;
   }
   @keyframes bob{
@@ -306,8 +312,12 @@
     background: radial-gradient(circle, rgba(182,146,79,0.12), transparent 70%);
   }
   .card .icon{
-    width: 36px; height: 36px; margin: 0 auto 10px;
-    color: var(--gold);
+    width: 46px; height: 46px; margin: 0 auto 10px;
+    padding: 10px;
+    border-radius: 50%;
+    color: #9b5c4f;
+    background: rgba(155,92,79,0.12);
+    border: 1px solid rgba(155,92,79,0.3);
   }
   .card .label{
     font-size: 14px; letter-spacing: normal; color: var(--sage);
@@ -354,16 +364,16 @@
     width: fit-content;
     padding: 12px 28px;
     border-radius: 40px;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    background: transparent;
+    border: 1.5px solid #9b5c4f;
+    color: #9b5c4f;
+    background: rgba(155,92,79,0.08);
     font-family: 'Tajawal', sans-serif;
     font-size: 15px;
     letter-spacing: normal;
     text-decoration: none;
     transition: background 0.3s ease, color 0.3s ease;
   }
-  .map-btn:active{ background: var(--gold); color: #fff; }
+  .map-btn:active{ background: #9b5c4f; color: #fff; }
 
   /* ============ Countdown ============ */
   .countdown-wrap{
@@ -378,23 +388,23 @@
     display: flex; justify-content: center; gap: 8px;
   }
   .countdown .unit{
-    background: var(--sage-deep);
+    background: #c4ab8f;
     color: var(--ivory);
     border-radius: 14px;
     padding: 12px 4px;
     width: 64px;
-    box-shadow: 0 8px 18px rgba(95,111,82,0.35);
+    box-shadow: 0 8px 18px rgba(147,113,78,0.35);
   }
   .countdown .unit .num{
     font-family: 'Aref Ruqaa', serif;
     font-size: 27px;
-    color: var(--gold-light);
+    color: #fffaf0;
   }
   .countdown .unit .unit-label{
     font-size: 12px;
     margin-top: 3px;
     letter-spacing: normal;
-    color: var(--sage-light);
+    color: #f3e9d8;
   }
 
   /* ============ Personal note ============ */
@@ -431,7 +441,7 @@
     letter-spacing: normal;
     color: var(--sage);
   }
-  footer .heart{ color: var(--gold); }
+  footer .heart{ color: #c0495a; }
 
   /* ============ Music toggle ============ */
   #sound-toggle{
@@ -442,7 +452,7 @@
     width: 46px; height: 46px;
     border-radius: 50%;
     border: 1px solid var(--gold-light);
-    background: rgba(95,111,82,0.85);
+    background: rgba(147,113,78,0.85);
     backdrop-filter: blur(4px);
     display: flex; align-items: center; justify-content: center;
     cursor: pointer;
@@ -542,8 +552,8 @@
           <stop offset="100%" stop-color="#d6bd8e"/>
         </radialGradient>
         <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#bdc9ac"/>
-          <stop offset="100%" stop-color="#8a9c73"/>
+          <stop offset="0%" stop-color="#e6d6b0"/>
+          <stop offset="100%" stop-color="#bfa270"/>
         </linearGradient>
 
         <g id="roseBloom">
@@ -572,7 +582,7 @@
 
         <g id="roseLeaf">
           <path d="M0,0 C-16,-4 -30,4 -34,20 C-16,22 -2,14 0,0 Z" fill="url(#leafGrad)"/>
-          <path d="M-2,-1 C-12,3 -22,10 -30,18" stroke="#71835c" stroke-width="0.6" fill="none" opacity="0.55"/>
+          <path d="M-2,-1 C-12,3 -22,10 -30,18" stroke="#8f7447" stroke-width="0.6" fill="none" opacity="0.55"/>
         </g>
       </defs>
     </svg>
